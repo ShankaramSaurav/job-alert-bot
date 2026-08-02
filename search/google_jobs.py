@@ -4,16 +4,16 @@ import requests
 SERPER_URL = "https://google.serper.dev/search"
 
 QUERIES = [
-    '"Senior Data Engineer" Snowflake India',
-    '"Lead Data Engineer" Snowflake India',
-    '"Staff Data Engineer" Snowflake India',
-    '"Principal Data Engineer" Snowflake India',
-    '"Snowflake Data Engineer" India',
-    '"Data Platform Engineer" Snowflake',
-    '"Snowflake Architect"',
-    '"Cloud Data Engineer" Snowflake',
-    '"Data Warehouse Engineer" Snowflake',
-    '"Analytics Engineer" Snowflake',
+    "Senior Data Engineer Snowflake India",
+    "Lead Data Engineer Snowflake India",
+    "Staff Data Engineer Snowflake India",
+    "Principal Data Engineer Snowflake India",
+    "Snowflake Data Engineer India",
+    "Data Platform Engineer Snowflake",
+    "Snowflake Architect",
+    "Cloud Data Engineer Snowflake",
+    "Data Warehouse Engineer Snowflake",
+    "Analytics Engineer Snowflake",
 ]
 
 def search():
