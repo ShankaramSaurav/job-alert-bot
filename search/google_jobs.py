@@ -48,7 +48,11 @@ def search():
         )
 
         if response.status_code != 200:
-            print(f"Failed for query: {query}")
+            print("=" * 80)
+            print(f"Query: {query}")
+            print("Status Code:", response.status_code)
+            print("Response:", response.text)
+            print("=" * 80)
             continue
 
         data = response.json()
