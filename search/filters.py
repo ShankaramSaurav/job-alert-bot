@@ -34,4 +34,5 @@ PREFERRED_LOCATIONS = [
     "mumbai",
     "chennai",
     "remote",
+    "usa"
 ]
