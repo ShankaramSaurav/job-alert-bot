@@ -36,3 +36,18 @@ PREFERRED_LOCATIONS = [
     "remote",
     "usa"
 ]
+
+SNOWFLAKE_SKILLS = [
+    "snowflake",
+    "snowpark",
+    "sql",
+    "python",
+    "dbt",
+    "airflow",
+    "etl",
+    "elt",
+    "data warehouse",
+    "aws",
+    "azure",
+    "gcp",
+]
