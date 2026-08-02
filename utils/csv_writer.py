@@ -1,7 +1,9 @@
-import pandas as pd
 import os
+import pandas as pd
+
 
 def export(jobs):
+
     if not jobs:
         return
 
@@ -10,7 +12,7 @@ def export(jobs):
     df = pd.DataFrame(jobs)
     df["skills"] = df["skills"].apply(lambda x: ", ".join(x))
 
-    OUTPUT = "report.csv"
+    OUTPUT = "output/report.csv"
 
     df.to_csv(OUTPUT, index=False)
 
