@@ -8,8 +8,12 @@ QUERIES = [
     '"Lead Data Engineer" Snowflake India',
     '"Staff Data Engineer" Snowflake India',
     '"Principal Data Engineer" Snowflake India',
-    '"Data Platform Engineer" Snowflake India',
     '"Snowflake Data Engineer" India',
+    '"Data Platform Engineer" Snowflake',
+    '"Snowflake Architect"',
+    '"Cloud Data Engineer" Snowflake',
+    '"Data Warehouse Engineer" Snowflake',
+    '"Analytics Engineer" Snowflake',
 ]
 
 def search():
