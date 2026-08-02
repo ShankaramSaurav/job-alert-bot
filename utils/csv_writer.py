@@ -10,7 +10,8 @@ def export(jobs):
     df = pd.DataFrame(jobs)
     df["skills"] = df["skills"].apply(lambda x: ", ".join(x))
 
-    output_file = "output/report.csv"
-    df.to_csv(output_file, index=False)
+    OUTPUT = "report.csv"
 
-    print(f"CSV exported to {output_file}")
+    df.to_csv(OUTPUT, index=False)
+
+    return OUTPUT
