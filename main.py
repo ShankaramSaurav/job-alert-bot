@@ -3,7 +3,7 @@ import json
 from search.greenhouse import search as greenhouse
 from search.lever import search as lever
 
-from search.filters import ROLES, IGNORE, PREFERRED_LOCATIONS
+from search.filters import ROLES, IGNORE, PREFERRED_LOCATIONS, SNOWFLAKE_SKILLS
 
 from utils.history import remove_duplicates
 from utils.keyword_extractor import extract
@@ -43,9 +43,13 @@ for job in all_jobs:
         word.lower() in title.lower()
         for word in IGNORE
     )
-
+    skill_matches = [
+    skill for skill in SNOWFLAKE_SKILLS
+    if skill in description
+    ]
+    
     # Snowflake must be mentioned
-    snowflake_match = "snowflake" in description
+    snowflake_match = len(skill_matches) >= 2
 
     # Preferred location
     location_match = any(
