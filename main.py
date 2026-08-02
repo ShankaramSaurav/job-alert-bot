@@ -6,6 +6,8 @@ from search.lever import search as lever
 
 from search.filters import ROLES, IGNORE
 
+from utils.history import remove_duplicates
+
 all_jobs=[]
 
 with open("data/companies.json") as f:
@@ -20,7 +22,7 @@ for company in companies["lever"]:
 
     all_jobs.extend(lever(company))
 
-filtered=[]
+filtered = remove_duplicates(filtered)
 
 for job in all_jobs:
 
