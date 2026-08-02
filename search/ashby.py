@@ -1,1 +1,4 @@
 
+def search(company):
+
+    return []
