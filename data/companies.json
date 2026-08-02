@@ -1,0 +1,45 @@
+{
+  "greenhouse": [
+    "databricks",
+    "snowflake",
+    "rubrik",
+    "confluent",
+    "mongodb",
+    "airbnb",
+    "stripe",
+    "plaid",
+    "affirm",
+    "asana",
+    "cloudflare",
+    "elastic",
+    "hashicorp",
+    "openai",
+    "notion",
+    "figma",
+    "coinbase",
+    "dropbox",
+    "grammarly",
+    "cockroachlabs"
+  ],
+
+  "lever": [
+    "atlassian",
+    "segment",
+    "brex",
+    "postman",
+    "rippling",
+    "scale-ai",
+    "miro",
+    "checkr",
+    "samsara",
+    "yugabyte"
+  ],
+
+  "ashby": [
+    "cursor",
+    "vercel",
+    "render",
+    "modal",
+    "turing"
+  ]
+}
