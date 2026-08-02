@@ -1,7 +1,7 @@
 import json
 
-from search.greenhouse import search as greenhouse
-from search.lever import search as lever
+#from search.greenhouse import search as greenhouse
+#from search.lever import search as lever
 
 from search.filters import ROLES, IGNORE
 
@@ -10,22 +10,25 @@ from utils.keyword_extractor import extract
 from utils.scorer import score
 from utils.csv_writer import export
 from utils.email_sender import send_email
-
+from search.manager import search_all
 
 # -----------------------------
 # Collect jobs from all sources
 # -----------------------------
 
-all_jobs = []
+# all_jobs = []
 
-with open("data/companies.json") as f:
-    companies = json.load(f)
+# with open("data/companies.json") as f:
+#     companies = json.load(f)
 
-for company in companies["greenhouse"]:
-    all_jobs.extend(greenhouse(company))
+# for company in companies["greenhouse"]:
+#     all_jobs.extend(greenhouse(company))
 
-for company in companies["lever"]:
-    all_jobs.extend(lever(company))
+# for company in companies["lever"]:
+#     all_jobs.extend(lever(company))
+
+
+all_jobs = search_all()
 
 
 # -----------------------------
