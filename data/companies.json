@@ -41,5 +41,16 @@
     "render",
     "modal",
     "turing"
+  ],
+  
+  "workday": [
+    {
+      "company": "NVIDIA",
+      "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite"
+    },
+    {
+      "company": "Visa",
+      "url": "https://visa.wd1.myworkdayjobs.com/en-US/External"
+    }
   ]
 }
