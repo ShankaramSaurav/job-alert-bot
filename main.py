@@ -3,7 +3,7 @@ from email_report import send_email
 
 jobs = search_jobs()
 
+print(f"Found {len(jobs)} jobs")
+
 if jobs:
     send_email(jobs)
-else:
-    print("No matching jobs found.")
