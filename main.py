@@ -3,7 +3,7 @@ import json
 from search.greenhouse import search as greenhouse
 from search.lever import search as lever
 
-from search.filters import ROLES, IGNORE
+from search.filters import ROLES, IGNORE, PREFERRED_LOCATIONS
 
 from utils.history import remove_duplicates
 from utils.keyword_extractor import extract
@@ -27,12 +27,35 @@ for company in companies["lever"]:
 filtered = []
 
 for job in all_jobs:
+
     title = job["title"]
+    description = job["description"].lower()
+    location = job["location"].lower()
 
-    if any(x.lower() in title.lower() for x in ROLES):
-        if not any(x.lower() in title.lower() for x in IGNORE):
-            filtered.append(job)
+    # Role check
+    role_match = any(
+        role.lower() in title.lower()
+        for role in ROLES
+    )
 
+    # Ignore unwanted roles
+    ignored = any(
+        word.lower() in title.lower()
+        for word in IGNORE
+    )
+
+    # Snowflake must be mentioned
+    snowflake_match = "snowflake" in description
+
+    # Preferred location
+    location_match = any(
+        loc in location
+        for loc in PREFERRED_LOCATIONS
+    )
+
+    if role_match and not ignored and snowflake_match and location_match:
+        filtered.append(job)
+        
 # Remove duplicate jobs
 filtered = remove_duplicates(filtered)
 
