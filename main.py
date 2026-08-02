@@ -2,7 +2,7 @@ import json
 
 #from search.greenhouse import search as greenhouse
 #from search.lever import search as lever
-
+from search.manager import search_all
 from search.filters import ROLES, IGNORE
 
 from utils.history import remove_duplicates
@@ -10,7 +10,7 @@ from utils.keyword_extractor import extract
 from utils.scorer import score
 from utils.csv_writer import export
 from utils.email_sender import send_email
-from search.manager import search_all
+
 
 # -----------------------------
 # Collect jobs from all sources
