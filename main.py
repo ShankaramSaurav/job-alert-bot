@@ -48,7 +48,7 @@ for job in all_jobs:
     if skill in description
     ]
     
-    # Snowflake must be mentioned
+    # Snowflake skill must be mentioned
     snowflake_match = len(skill_matches) >= 2
 
     # Preferred location
