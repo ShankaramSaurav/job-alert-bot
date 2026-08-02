@@ -3,6 +3,7 @@ import json
 from search.greenhouse import search as greenhouse
 from search.lever import search as lever
 from search.workday import search as workday
+from search.google_jobs import search as google_jobs
 
 def search_all():
 
@@ -22,5 +23,7 @@ def search_all():
     # Search workday companies
     for company in companies["workday"]:
         all_jobs.extend(workday(company))
+
+    all_jobs.extend(google_jobs())
 
     return all_jobs
