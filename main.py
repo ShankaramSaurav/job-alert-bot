@@ -3,7 +3,7 @@ import json
 from search.greenhouse import search as greenhouse
 from search.lever import search as lever
 
-from search.filters import ROLES, IGNORE, PREFERRED_LOCATIONS, SNOWFLAKE_SKILLS
+from search.filters import ROLES, IGNORE
 
 from utils.history import remove_duplicates
 from utils.keyword_extractor import extract
@@ -11,7 +11,11 @@ from utils.scorer import score
 from utils.csv_writer import export
 from utils.email_sender import send_email
 
-# Collect all jobs
+
+# -----------------------------
+# Collect jobs from all sources
+# -----------------------------
+
 all_jobs = []
 
 with open("data/companies.json") as f:
@@ -23,72 +27,103 @@ for company in companies["greenhouse"]:
 for company in companies["lever"]:
     all_jobs.extend(lever(company))
 
-# Filter jobs
+
+# -----------------------------
+# Filter relevant jobs
+# -----------------------------
+
 filtered = []
 
 for job in all_jobs:
 
-    title = job["title"]
-    description = job["description"].lower()
-    location = job["location"].lower()
+    title = job.get("title", "").lower()
 
-    # Role check
     role_match = any(
-        role.lower() in title.lower()
+        role.lower() in title
         for role in ROLES
     )
 
-    # Ignore unwanted roles
     ignored = any(
-        word.lower() in title.lower()
+        word.lower() in title
         for word in IGNORE
     )
-    skill_matches = [
-    skill for skill in SNOWFLAKE_SKILLS
-    if skill in description
-    ]
-    
-    # Snowflake skill must be mentioned
-    snowflake_match = len(skill_matches) >= 2
 
-    # Preferred location
-    location_match = any(
-        loc in location
-        for loc in PREFERRED_LOCATIONS
-    )
-
-    if role_match and not ignored and snowflake_match and location_match:
+    if role_match and not ignored:
         filtered.append(job)
-        
-# Remove duplicate jobs
+
+
+# -----------------------------
+# Remove duplicates
+# -----------------------------
+
 filtered = remove_duplicates(filtered)
 
-# Extract skills and calculate score
+
+# -----------------------------
+# Extract skills & calculate score
+# -----------------------------
+
 for job in filtered:
-    skills = extract(job["description"])
+
+    description = job.get("description", "")
+
+    skills = extract(description)
+
     job["skills"] = skills
     job["match"] = score(skills)
 
-# Export to CSV
-if filtered:
-    csv_file = export(filtered)
-    send_email(csv_file)
-else:
-    print("No matching jobs found today.")
 
-# Print results
+# Highest matching jobs first
+filtered.sort(
+    key=lambda x: x["match"],
+    reverse=True
+)
+
+
+# -----------------------------
+# Generate CSV & Email
+# -----------------------------
+
+if filtered:
+
+    csv_file = export(filtered)
+
+    if csv_file:
+        send_email(csv_file)
+
+    print(f"\nEmail sent with {len(filtered)} matching jobs.")
+
+else:
+
+    print("\nNo matching jobs found today.")
+
+
+# -----------------------------
+# Console Output
+# -----------------------------
+
 print()
-print("=" * 80)
+print("=" * 90)
 print(f"Found {len(filtered)} matching jobs")
-print("=" * 80)
+print("=" * 90)
 
 for job in filtered:
-    print("=" * 80)
-    print("Company :", job["company"])
-    print("Role    :", job["title"])
-    print("Location:", job["location"])
-    print("Platform:", job["platform"])
-    print("Match   :", f'{job["match"]}%')
-    print("Skills  :", ", ".join(job["skills"]))
-    print("Apply   :", job["url"])
+
+    print("=" * 90)
+
+    print("Company :", job.get("company", "N/A"))
+    print("Role    :", job.get("title", "N/A"))
+    print("Location:", job.get("location", "N/A"))
+    print("Platform:", job.get("platform", "N/A"))
+    print("Match   :", f"{job.get('match', 0)}%")
+
+    skills = job.get("skills", [])
+
+    if skills:
+        print("Skills  :", ", ".join(skills))
+    else:
+        print("Skills  : None detected")
+
+    print("Apply   :", job.get("url", ""))
+
     print()
