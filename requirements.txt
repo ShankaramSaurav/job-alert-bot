@@ -1,6 +1,6 @@
 requests
 beautifulsoup4
-pandas
 lxml
+pandas
 python-dotenv
-jinja2
+tenacity
