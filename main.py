@@ -66,8 +66,11 @@ for job in filtered:
     job["match"] = score(skills)
 
 # Export to CSV
-csv_file = export(filtered)
-send_email(csv_file)
+if filtered:
+    csv_file = export(filtered)
+    send_email(csv_file)
+else:
+    print("No matching jobs found today.")
 
 # Print results
 print()
