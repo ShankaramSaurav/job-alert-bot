@@ -8,6 +8,10 @@ from search.filters import ROLES, IGNORE
 
 from utils.history import remove_duplicates
 
+from utils.keyword_extractor import extract
+
+from utils.scorer import score
+
 all_jobs=[]
 
 with open("data/companies.json") as f:
@@ -43,5 +47,17 @@ print(f"Found {len(filtered)} matching jobs")
 print("="*80)
 
 for job in filtered:
+    skills = extract(job["description"])
 
-    print(job)
+    job["skills"] = skills
+    job["match"] = score(skills)
+
+    print("=" * 80)
+    print("Company :", job["company"])
+    print("Role    :", job["title"])
+    print("Location:", job["location"])
+    print("Platform:", job["platform"])
+    print("Match   :", f'{job["match"]}%')
+    print("Skills  :", ", ".join(job["skills"]))
+    print("Apply   :", job["url"])
+    print()
