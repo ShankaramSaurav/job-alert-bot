@@ -32,6 +32,8 @@ def search(company):
 
                 "url": job["absolute_url"],
 
+                "description": job.get("content", ""),
+
                 "platform": "Greenhouse"
 
             })
